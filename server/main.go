@@ -1,29 +1,17 @@
 package server
 
 import (
-	"fmt"
-	"log"
+	"net/http"
 
-	"golang.zx2c4.com/wireguard/wgctrl"
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 )
 
 func main() {
-	// initialize the wireguard control client
-	client, err := wgctrl.New()
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer client.Close()
-
-	dev, err := client.Device("wg0")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println("Device:", dev.Name)
-	fmt.Println("Public key:", dev.PublicKey)
-
-	for _, peer := range dev.Peers {
-		fmt.Println("Peer:", peer.PublicKey)
-	}
+	r := chi.NewRouter()
+	r.Use(middleware.Logger)
+	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("welcome"))
+	})
+	http.ListenAndServe(":3000", r)
 }

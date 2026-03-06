@@ -17,4 +17,4 @@ all of your private DNS servers, NAT, and local subnets.
 
 This project aims to create a VPN server/client that's designed around these ideas. We don't need to host a private DNS
 server, we don't need to NAT traffic (even if we may choose to do so in some cases), and we can get rid of the local
-subnet and focus strictly on routing via public IPv6 addresses. 
+subnet and focus strictly on routing via public IPv6 addresses.
